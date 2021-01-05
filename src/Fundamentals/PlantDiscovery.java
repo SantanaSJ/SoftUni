@@ -61,12 +61,7 @@ public class PlantDiscovery {
             String name = nameAndRarity[0];
             int rarity = Integer.parseInt(nameAndRarity[1]);
             Plant p = new Plant(name, rarity);
-            plantsByName.put(p.getName(), p);//на позиция име, сложи всички данни - име и рядкост
-            //обръщане към обекти:
-            //Plant acacia = plantsByName.get("Acacia");
-            //acacia.rating.add(3.0);
-            //acacia.rating.add(3.0);
-            //лесно достъпваме обектите, които ни трябват и променяме стойностите
+            plantsByName.put(p.getName(), p);
         }
 
         String command = scanner.nextLine();
