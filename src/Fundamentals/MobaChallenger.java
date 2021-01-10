@@ -16,7 +16,7 @@ public class MobaChallenger {
                 String name = parts[0];
                 String position = parts[1];
                 int skill = Integer.parseInt(parts[2]);
-//
+
                 if (!info.containsKey(name)) {
                     info.put(name, new LinkedHashMap<>());
                     info.get(name).put(position, skill);
@@ -85,11 +85,5 @@ public class MobaChallenger {
                             })
                             .forEach(k -> System.out.printf("- %s <::> %d%n", k.getKey(), k.getValue()));
                 });
-
-
-
-
-
-
     }
 }
