@@ -8,7 +8,6 @@ public class MobaChallenger {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-//          name                 position skill
         Map<String, LinkedHashMap<String, Integer>> info = new LinkedHashMap<>();
         String lines = scanner.nextLine();
         while (!lines.equals("Season end")) {
@@ -17,14 +16,14 @@ public class MobaChallenger {
                 String name = parts[0];
                 String position = parts[1];
                 int skill = Integer.parseInt(parts[2]);
-//              ако няма нищо в мапа
+//
                 if (!info.containsKey(name)) {
                     info.put(name, new LinkedHashMap<>());
                     info.get(name).put(position, skill);
-                } else {//ако има име, но няма позиция
+                } else {
                     if (!info.get(name).containsKey(position)) {
                         info.get(name).put(position, skill);
-                    } else {// ако има име и има позиция - ъпдейт
+                    } else {
                         int currentSkill = info.get(name).get(position);
                           info.get(name).put(position, (Math.max(skill, currentSkill)));
                     }
@@ -33,9 +32,6 @@ public class MobaChallenger {
                 String[] parts = lines.split(" vs ");
                 String player1 = parts[0];
                 String player2 = parts[1];
-                //compare positions in nested map
-                //          name            position skill
-               // Map<String, LinkedHashMap<String, Integer>> info = new LinkedHashMap<>();
 
                 if (info.containsKey(player1) && info.containsKey(player2)) {
                     boolean areTheSame = false;
@@ -59,11 +55,10 @@ public class MobaChallenger {
                         }
                     }
                 }
-
-
             }
             lines = scanner.nextLine();
         }
+
         info.entrySet()
                 .stream()
                 .sorted((a, b) -> {
