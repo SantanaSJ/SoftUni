@@ -29,9 +29,9 @@ public class BalancedParentheses {
                         isValid = false;
                     } else {
                         String stackP = stack.peek();
-                        if (!(currentP.equals(")") && stackP.equals("(") ||
-                                currentP.equals("]") && stackP.equals("[") ||
-                                currentP.equals("}") && stackP.equals("{"))) {
+                        if (!(currentP.equals(")") && stackP.equals("(")
+                                || currentP.equals("]") && stackP.equals("[")
+                                || currentP.equals("}") && stackP.equals("{"))) {
 
                             isValid = false;
                         } else {
