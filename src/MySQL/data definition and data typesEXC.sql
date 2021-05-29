@@ -11,9 +11,6 @@ CREATE TABLE `minions` (
 CREATE TABLE `towns` (
 `town_id` INT PRIMARY KEY AUTO_INCREMENT, 
 `name` VARCHAR(30) NOT NULL
-/*или на едно място 
-CONSTRAINT fk_minions_towns...
-*/
 );
 -- -----#EXC2-----
 ALTER TABLE `minions`
