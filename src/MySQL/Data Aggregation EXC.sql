@@ -3,16 +3,16 @@ SELECT count(*)
 FROM `wizzard_deposits`;
 
 -- -----EXC2-----
-#Select the size of the longest magic wand. 
-#Rename the new column appropriately.
+/*Select the size of the longest magic wand. 
+Rename the new column appropriately.*/
 SELECT * FROM `wizzard_deposits`;
 SELECT max(`magic_wand_size`) AS 'longest_magic_wand'
 FROM `wizzard_deposits`;
 
 -- -----EXC3-----
-#For wizards in each deposit group show the longest magic wand. 
-#Sort result by longest magic wand for each deposit group in increasing order, 
-#then by deposit_group alphabetically. Rename the new column appropriately.
+/*For wizards in each deposit group show the longest magic wand. 
+Sort result by longest magic wand for each deposit group in increasing order, 
+then by deposit_group alphabetically. Rename the new column appropriately.*/
 SELECT * FROM `wizzard_deposits`;
 SELECT `deposit_group`, max(`magic_wand_size`) AS 'longest_magic_wand'
 FROM `wizzard_deposits`
@@ -20,15 +20,15 @@ GROUP BY `deposit_group`
 ORDER BY `longest_magic_wand`, `deposit_group`;
 
 -- -----EXC4-----
-#Select the deposit group with the lowest average wand size.
+/*Select the deposit group with the lowest average wand size.*/
 SELECT `deposit_group`
 FROM `wizzard_deposits`
 GROUP BY `deposit_group`
 LIMIT 1;#ORDER BY avg(`magic_wand_size`)
 
 -- -----EXC5----
-#Select all deposit groups and its total deposit sum. 
-#Sort result by total_sum in increasing order.
+/*Select all deposit groups and its total deposit sum. 
+Sort result by total_sum in increasing order.*/
 SELECT `deposit_group`, sum(`deposit_amount`) AS 'total_sum'
 FROM `wizzard_deposits`
 GROUP BY `deposit_group`
@@ -99,7 +99,7 @@ SELECT
     END) AS 'age_group', count(*) AS 'wizzard_count'
 FROM
     `wizzard_deposits`
-GROUP BY `age_group`#групиране на база новосъздадените age групи
+GROUP BY `age_group`
 ORDER BY `age_group` ASC;
 
 -- -----EXC10-----
@@ -177,13 +177,13 @@ ORDER BY `department_id` ASC;
 
 -- -----EXC15-----
 
-#Count the salaries of all employees who don't have a manager.	
+/*Count the salaries of all employees who don't have a manager.	*/
 SELECT count(`salary`) FROM `employees`
 WHERE `manager_id` IS NULL;
 
 -- -----EXC16-----
-#Find the third highest salary in each department if there is such. 
-#Sort result by department_id in increasing order.
+/*Find the third highest salary in each department if there is such. 
+Sort result by department_id in increasing order.*/
 SELECT 
     e.`department_id`,
     (SELECT DISTINCT
