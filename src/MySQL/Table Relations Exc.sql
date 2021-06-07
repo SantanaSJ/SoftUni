@@ -1,9 +1,5 @@
-CREATE DATABASE `test76`;
-USE `test76`;
-
 -- -----EXC1-----
 #1.	One-To-One Relationship
-#започваме от таблицата без никакви релации
 
 CREATE TABLE `passports` (
 `passport_id` INT PRIMARY KEY AUTO_INCREMENT,
@@ -36,6 +32,7 @@ VALUES
 
 -- -----EXC2-----
 #2.	One-To-Many Relationship
+
 CREATE TABLE `manufacturers` (
 `manufacturer_id` INT PRIMARY KEY AUTO_INCREMENT,
 `name` VARCHAR(20) NOT NULL,
@@ -68,6 +65,7 @@ VALUES
 
 -- -----EXC3-----
 #3.	Many-To-Many Relationship
+
 CREATE TABLE `students` (
 `student_id` INT PRIMARY KEY AUTO_INCREMENT,
 `name` VARCHAR(20)
@@ -117,6 +115,8 @@ VALUES
 (2, 103);
 
 -- ----EXC4----
+#4.	Self-Referencing
+
 CREATE TABLE `teachers` (
 `teacher_id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 `name` VARCHAR(20),
@@ -139,7 +139,7 @@ FOREIGN KEY (`manager_id`)
 REFERENCES `teachers`(`teacher_id`);
 
 -- -----EXC5-----
-CREATE DATABASE `Online Store`;
+
 USE `Online store`;
 CREATE TABLE `items` (
 `item_id` INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -201,6 +201,7 @@ FOREIGN KEY (`city_id`)
 REFERENCES `cities`(`city_id`);
 
 -- -----EXC6-----
+
 CREATE DATABASE `university`;
 USE `university`;
 
@@ -253,6 +254,7 @@ REFERENCES `students`(`student_id`)
 );
 
 -- -----EXC9-----
+
 USE `geography`;
 
 SELECT m.`mountain_range`, p.`peak_name`, p.`elevation`
