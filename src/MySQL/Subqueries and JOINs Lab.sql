@@ -1,21 +1,3 @@
-#декартово произведение
-SELECT * 
-FROM `employees` AS e
-JOIN `departments` AS d;
-
--- ------------------------------
--- INNER
-SELECT * -- e.first_name, d.name 
-FROM `employees` AS e
-JOIN `departments` AS d
-ON e.department_id = d.department_id;
-
--- LEFT
-SELECT *  
-FROM `employees` AS e
-LEFT JOIN `departments` AS d
-ON e.department_id = d.department_id;
-
 -- -----EXC1-----
 
 SELECT 
