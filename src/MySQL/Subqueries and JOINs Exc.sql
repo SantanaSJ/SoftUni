@@ -1,4 +1,12 @@
 -- -----EXC1-----
+/*
+Write a query that selects:
+•	employee_id
+•	job_title
+•	address_id
+•	address_text
+Return the first 5 rows sorted by address_id in ascending order.
+*/
 SELECT 
 e.`employee_id`,
 e.`job_title`, 
@@ -11,6 +19,15 @@ ORDER BY `address_id` ASC
 LIMIT 5;
 
 -- -----EXC2-----
+/*
+Write a query that selects:
+•	first_name
+•	last_name
+•	town
+•	address_text
+Sort the result by first_name in ascending order then by last_name.
+Select first 5 employees.
+*/
 SELECT 
 e.`first_name`, 
 e.`last_name`,
@@ -24,6 +41,15 @@ ORDER BY `first_name` ASC, `last_name`
 LIMIT 5;
 
 -- -----EXC3-----
+/*
+Write a query that selects:
+•	employee_id
+•	first_name
+•	last_name
+•	department_name
+Sort the result by employee_id in descending order. 
+Select only employees from the "Sales" department.
+*/
 SELECT 
 e.`employee_id`,
 e.`first_name`,
@@ -36,6 +62,15 @@ WHERE d.`name` = 'Sales'
 ORDER BY `employee_id` DESC;
 
 -- -----EXC4-----
+/*
+Write a query that selects:
+•	employee_id
+•	first_name
+•	salary
+•	department_name
+Filter only employees with salary higher than 15000. 
+Return the first 5 rows sorted by department_id in descending order.
+*/
 SELECT 
 e.`employee_id`,
 e.`first_name`,
@@ -49,6 +84,13 @@ ORDER BY d.`department_id` DESC
 LIMIT 5;
 
 -- -----EXC5-----
+/*
+Write a query that selects:
+•	employee_id
+•	first_name
+Filter only employees without a project. 
+Return the first 3 rows sorted by employee_id in descending order.
+*/
 SELECT 
 e.`employee_id`,
 e.`first_name`
@@ -60,6 +102,13 @@ ORDER BY e.`employee_id` DESC
 LIMIT 3;
 
 -- -----EXC5-----
+/*
+Write a query that selects:
+•	employee_id
+•	first_name
+Filter only employees without a project. 
+Return the first 3 rows sorted by employee_id in descending order.
+*/
 SELECT e.`employee_id`, e.`first_name`
 FROM `employees` AS e
 WHERE e.`employee_id` NOT IN 
@@ -68,6 +117,15 @@ ORDER BY e.`employee_id` DESC
 LIMIT 3;
 
 -- -----EXC6-----
+/*
+Write a query that selects:
+•	first_name
+•	last_name
+•	hire_date
+•	dept_name
+Filter only employees hired after 1/1/1999 and from either the "Sales" 
+or the "Finance" departments. Sort the result by hire_date (ascending).
+*/
 SELECT 
 e.`first_name`,
 e.`last_name`,
@@ -80,6 +138,15 @@ WHERE e.`hire_date` > '1999-01-01' AND d.`name` IN ('Sales', 'Finance')
 ORDER BY `hire_date` ASC;
 
 -- -----EXC7-----
+/*
+Write a query that selects:
+•	employee_id
+•	first_name
+•	project_name
+Filter only employees with a project, which has started after 13.08.2002
+and it is still ongoing (no end date). Return the first 5 rows sorted 
+by first_name then by project_name both in ascending order.
+*/
 SELECT 
 e.`employee_id`,
 e.`first_name`,
@@ -94,6 +161,15 @@ ORDER BY e.`first_name`, p.`name` ASC
 LIMIT 5;
 
 -- -----EXC8-----
+/*
+Write a query that selects:
+•	employee_id
+•	first_name
+•	project_name
+Filter all the projects of employees with id 24. 
+If the project has started after 2005 inclusively the return value should be NULL. 
+Sort the result by project_name alphabetically.
+*/
 SELECT 
 e.`employee_id`,
 e.`first_name`,
@@ -107,6 +183,15 @@ WHERE e.`employee_id` = 24
 ORDER BY `p.name`;
 
 -- -----EXC9-----
+/*
+Write a query that selects:
+•	employee_id
+•	first_name
+•	manager_id
+•	manager_name
+Filter all employees with a manager who has id equal to 3 or 7. 
+Return all rows sorted by employee first_name in ascending order.
+*/
 SELECT 
 e.`employee_id`,
 e.`first_name`,
@@ -119,6 +204,16 @@ WHERE e.`manager_id` IN (3, 7)
 ORDER BY e.`first_name` ASC;
 
 -- -----EXC10-----
+/*Write a query that selects:
+•	employee_id
+•	employee_name
+•	manager_name		
+•	department_name
+Show the first 5 employees (only for employees who have a manager) with their 
+managers and the departments they are in (show the departments of the employees).
+ Order by employee_id.
+*/
+#SELF JOIN
 SELECT 
 e.`employee_id`,
 concat_Ws(' ', e.`first_name`, e.`last_name`) AS 'first_name',
@@ -128,11 +223,12 @@ FROM `employees` AS e
 JOIN `employees` AS m
 ON e.`manager_id` = m.`employee_id`
 JOIN `departments` AS d
-ON e.`department_id` = d.`department_id`
+ON e.`department_id` = d.`department_id`#сравнение по ключове
 ORDER BY e.`employee_id`
 LIMIT 5;
 
 -- -----EXC11-----
+#Write a query that returns the value of the lowest average salary of all departments.
 SELECT 
  avg(salary) AS 's.avg'
 FROM `employees`
@@ -141,6 +237,15 @@ ORDER BY `s.avg`
 LIMIT 1;
 
 -- -----EXC12-----
+/*
+Write a query that selects:
+•	country_code	
+•	mountain_range
+•	peak_name
+•	elevation
+Filter all peaks in Bulgaria with elevation over 2835. 
+Return all rows sorted by elevation in descending order.
+*/
 SELECT 
 c.`country_code`, m.`mountain_range`, p.`peak_name`, p.`elevation`
 FROM `countries` AS c
@@ -154,6 +259,14 @@ WHERE c.`country_code` = 'BG' AND p.`elevation` > 2835
 ORDER BY p.`elevation` DESC;
 
 -- -----EXC13-----
+/*
+Write a query that selects:
+•	country_code
+•	mountain_range
+Filter the count of the mountain ranges in the 
+United States, Russia and Bulgaria. 
+Sort result by mountain_range count in decreasing order.
+*/
 SELECT 
 mc.`country_code`,
 count(m.`id`) AS 'm_count'
@@ -165,6 +278,13 @@ GROUP BY mc.`country_code`
 ORDER BY `m_count` DESC;
 
 -- -----EXC14-----
+/*
+Write a query that selects:
+•	country_name
+•	river_name
+Find the first 5 countries with or without rivers in Africa. 
+Sort them by country_name in ascending order.
+*/
 SELECT 
 c.`country_name`,
 r.`river_name`
@@ -178,6 +298,15 @@ ORDER BY `country_name` ASC
 LIMIT 5;
 
 -- -----15-----
+/*
+Write a query that selects:
+•	continent_code
+•	currency_code
+•	currency_usage
+Find all continents and their most used currency. 
+Filter any currency that is used in only one country. 
+Sort the result by continent_code and currency_code.
+*/
 SELECT 
 `continent_code`,
 `currency_code`,
@@ -195,6 +324,7 @@ LIMIT 1
 ORDER BY `continent_code`, `currency_code`;
 
 -- -----EXC16-----
+#Find the count of all countries which don't have a mountain.
 SELECT 
 count(*)
 FROM `countries` AS c
@@ -202,6 +332,12 @@ WHERE c.`country_code` NOT IN
 (SELECT `country_code` FROM `mountains_countries`);
 
 -- -----EXC17-----
+/*
+For each country, find the elevation of the highest peak and the length of the longest river, 
+sorted by the highest peak_elevation (from highest to lowest), then by the longest river_length 
+(from longest to smallest), then by country_name (alphabetically). 
+Display NULL when no data is available in some of the columns. Limit only the first 5 rows.
+*/
 SELECT 
 c.`country_name`,
 max(p.`elevation`) AS 'm.elevation',
