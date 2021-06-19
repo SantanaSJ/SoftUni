@@ -137,7 +137,7 @@ select
 t.`name`,
 t.established,
 t.fan_base,
-count(p.id) as 'players_count' #броим по уникална стойост
+count(p.id) as 'players_count'
 from teams as t
 left join players as p
 on p.team_id = t.id
