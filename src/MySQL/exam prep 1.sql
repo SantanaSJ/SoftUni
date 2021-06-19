@@ -86,11 +86,23 @@ references coaches(id)
 );
 -- ----- DML -----
 -- insert
+/*
+You will have to insert records of data into the coaches table, based on the players table. 
+For players with age over 45 (inclusive), insert data in the coaches table with the following values:
+•	first_name – set it to first name of the player
+•	last_name – set it to last name of the player.
+•	salary – set it to double as player’s salary. 
+•	coach_level – set it to be equals to count of the characters in player’s first_name.
+*/
 insert into coaches (first_name, last_name, salary, coach_level)
 SELECT first_name, last_name, salary * 2, char_length(first_name) FROM players
 WHERE age >= 45;
 
 -- update
+/*
+Update all coaches, who train one or more players and their first_name starts with ‘A’. 
+Increase their level with 1.
+*/
 update coaches
 set coach_level = coach_level + 1
 where first_name like 'A%'
@@ -98,12 +110,21 @@ and id = (select coach_id from players_coaches where coach_id = id limit 1);
 #AND id IN (select coach_id from players_coaches)
 
 -- delete
+/*
+As you remember at the beginning of our work, we promoted several football players to coaches. 
+Now you need to remove all of them from the table of players in order for our database to be updated accordingly.	
+Delete all players from table players, which are already added in table coaches. 
+*/
 delete from players
 where age >= 45;
 
 
 -- ----- Quering -----
 -- 5
+/*
+Extract from the Football Scout Database (fsd) database, info about all of the players. 
+Order the results by players - salary descending.
+*/
 select 
 first_name,
 age,
@@ -112,6 +133,12 @@ from players
 order by salary desc;
 
 -- 6
+/*
+One of the coaches wants to know more about all the young players (under age of 23) 
+who can strengthen his team in the offensive (played on position ‘A’). 
+As he is not paying a transfer amount, he is looking only for those who have not signed a contract so far 
+(haven’t hire_date) and have strength of more than 50. Order the results ascending by salary, then by age.
+*/
 select 
 p.id,
 concat(p.first_name, ' ', p.last_name) as full_name,
@@ -125,6 +152,10 @@ where p.age < 23  and p.`position` = 'A' and p.hire_date is null and sd.strength
 order by p.salary asc, p.age asc;
 
 -- 7
+/*
+Extract from the database all of the teams and the count of the players that they have.
+Order the results descending by count of players, then by fan_base descending. 
+*/
 select 
 t.`name`,
 t.established,
@@ -137,7 +168,7 @@ select
 t.`name`,
 t.established,
 t.fan_base,
-count(p.id) as 'players_count'
+count(p.id) as 'players_count' #броим по уникална стойост
 from teams as t
 left join players as p
 on p.team_id = t.id
@@ -145,6 +176,11 @@ group by t.id
 order by players_count desc, fan_base desc;
 
 -- 8
+/*
+Extract from the database, the fastest player (having max speed), in terms of towns where their team played.
+Order players by speed descending, then by town name.
+Skip players that played in team ‘Devify’
+*/
 select 
 max(sd.speed) as 'max_speed',
 t.`name`
@@ -163,6 +199,13 @@ order by max_speed desc, t.`name`;
 
 
 -- 9
+/*
+ And like everything else in this world, everything is ultimately about finances. 
+ Now you need to extract detailed information on the amount of all salaries given to football players 
+ by the criteria of the country in which they played.
+If there are no players in a country, display NULL.  
+Order the results by total count of players in descending order, then by country name alphabetically.
+*/
 SELECT 
 c.`name`,
 count(p.id) as total_count_of_players,
@@ -182,6 +225,10 @@ order by total_count_of_players desc, c.`name`
 
 -- Functions and Procedures
 -- 10
+/*
+Create a user defined function with the name udf_stadium_players_count (stadium_name VARCHAR(30)) 
+that receives a stadium’s name and returns the number of players that play home matches there.
+*/
 
 delimiter $$
 CREATE FUNCTION `udf_stadium_players_count`(stadium_name VARCHAR(30))
@@ -202,6 +249,15 @@ delimiter ;
 select udf_stadium_players_count('Jaxworks');
 
 -- 11
+/*
+Create a stored procedure udp_find_playmaker which accepts the following parameters:
+•	min_dribble_points -> skills_data
+•	team_name (with max length 45) -> teams, players
+ And extracts data about the players with the given skill stats (more than min_dribble_points), 
+ played for given team (team_name) and have more than average speed for all players. 
+Order players by speed descending. Select only the best one.
+Show all needed info for this player: full_name, age, salary, dribbling, speed, team name.
+*/
 delimiter $$
 CREATE PROCEDURE `udp_find_playmaker`(min_dribble_points INT, team_name varchar(45))
 BEGIN
