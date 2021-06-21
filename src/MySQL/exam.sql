@@ -78,20 +78,7 @@ concat('(088) 9999', id * 2)
 from drivers
 where id between 10 and 20;
 
--- Update???
-update cars
-set `condition` = 'C'
-where mileage >= 800000 and make != 'Mercedes-Benz';
-
-update cars
-set `condition` = 'C'
-where mileage is null 
-or 
-year >= 2010
-and make != 'Mercedes-Benz';
-
--- ---------------------------------------------------
-
+-- Update
 
 update cars
 set `condition` = 'C'
@@ -99,12 +86,6 @@ where  mileage >= 800000 or mileage is null
 and `year` >= '2010'
 and make not in ( 'Mercedes-Benz');
 
-select
-*
-from cars
-where  mileage >= 800000 or mileage is null  
-and year >= '2010'
-and make not in ('Mercedes-Benz');
 
 -- Delete
 delete c from clients as c
